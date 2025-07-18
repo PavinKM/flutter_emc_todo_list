@@ -20,34 +20,56 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          title: Text('Clinic Details'),
+          backgroundColor: Colors.greenAccent,
+          centerTitle: true,
+        ),
         body: Column(
           children: [
 
-            Container(
-              padding: EdgeInsets.all(10),
-              child: TextField(
-                controller: textController, //textEditingController
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Enter ur task')
+            Row(
+              children: [
+                Expanded(child: 
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: TextField(
+                      controller: textController, //textEditingController
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        label: Text('Enter Clinic Details')
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                
+                MaterialButton(onPressed: (){
+                  setState(() {
+                      displayText = textController.text ;
+                    });
+                  },
+                  child: Text('Click'),
+                  color: Colors.white,
+                  height: 50,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)
+                  ),
+                ),
+              ],
             ),
 
-            MaterialButton(onPressed: (){
-              setState(() {
-                  displayText = textController.text ;
-                });
-              },
-              child: Text('Click'),
-              color: Colors.white,
-              height: 50,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15)
-              ),
-            ),
+            Text(displayText),
 
-            Text(displayText)
+            Row(
+              children: [
+                Text("Hello"),
+                MaterialButton(onPressed: (){
+                  
+                },
+                child: Icon(Icons.delete),
+                )
+              ],
+            )
         
           ], 
         )
