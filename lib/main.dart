@@ -14,6 +14,8 @@ class _MainAppState extends State<MainApp> {
 
   String displayText = "No Text Data";
 
+  List<String> taskList = [];
+
   TextEditingController textController = TextEditingController();
 
   @override
@@ -25,6 +27,7 @@ class _MainAppState extends State<MainApp> {
           backgroundColor: Colors.greenAccent,
           centerTitle: true,
         ),
+
         body: Column(
           children: [
 
@@ -45,7 +48,9 @@ class _MainAppState extends State<MainApp> {
                 
                 MaterialButton(onPressed: (){
                   setState(() {
-                      displayText = textController.text ;
+                      displayText = '' ;
+                      taskList.add(textController.text);
+                      textController.clear();
                     });
                   },
                   child: Text('Click'),
@@ -60,17 +65,54 @@ class _MainAppState extends State<MainApp> {
 
             Text(displayText),
 
-            Row(
-              children: [
-                Text("Hello"),
-                MaterialButton(onPressed: (){
-                  
-                },
-                child: Icon(Icons.delete),
-                )
-              ],
-            )
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: Container(
+            //         child: Text("Hello"),
+            //         padding: EdgeInsets.all(10),
+            //       ),
+            //     ),
+                
+            //     MaterialButton(onPressed: (){
+
+            //       },
+            //       child: Icon(
+            //         Icons.delete,
+            //         color: Colors.red,
+            //         ),
+            //     )
+            //   ]
+            // ),
         
+            Flexible(
+              child: ListView.builder(
+                itemCount: taskList.length,
+                itemBuilder: (context, index){
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Text(taskList[index]),
+                            padding: EdgeInsets.all(10),
+                          ),
+                        ),
+                        
+                        MaterialButton(onPressed: (){
+                          setState(() {
+                            taskList.removeAt(index);
+                          });
+                          },
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                            ),
+                        )
+                      ]
+                    );
+                  }
+                ),
+            ),
           ], 
         )
       ),
