@@ -13,6 +13,9 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
 
   String displayText = "No Text Data";
+
+  TextEditingController textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,6 +26,7 @@ class _MainAppState extends State<MainApp> {
             Container(
               padding: EdgeInsets.all(10),
               child: TextField(
+                controller: textController, //textEditingController
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Enter ur task')
@@ -32,7 +36,7 @@ class _MainAppState extends State<MainApp> {
 
             MaterialButton(onPressed: (){
               setState(() {
-                  displayText = "Yes its working perfectly" ;
+                  displayText = textController.text ;
                 });
               },
               child: Text('Click'),
